@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from helloworld.core.infra.data.sqlalchemy import BaseModel
-from helloworld.auth.features.identity_key import IdentityKeyEntity
-
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column
+
+from helloworld.core.infra.data.sqlalchemy import BaseModel
+from helloworld.auth.features.identity_key import IdentityKeyEntity
 
 class IdentityKeyModel(BaseModel[IdentityKeyEntity]):
     __tablename__ = "identity_key"

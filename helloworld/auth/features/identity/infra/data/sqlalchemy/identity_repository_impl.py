@@ -2,14 +2,14 @@ from __future__ import annotations
 
 from typing import overload
 
-from helloworld.auth.features.identity import IdentityEntity
-from helloworld.auth.features.identity.data import IdentityRepository
-from .identity_model import IdentityModel
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from helloworld.core.infra.data.sqlalchemy import BaseRepository
 from helloworld.core.data.repositories.abstract_repository import LogicalOperator
+from helloworld.auth.features.identity import IdentityEntity
+from helloworld.auth.features.identity.data import IdentityRepository
 from helloworld.account.features.user import UserEntity
-
-from sqlalchemy.ext.asyncio import AsyncSession
+from .identity_model import IdentityModel
 
 class IdentityRepositoryImpl(IdentityRepository, BaseRepository[IdentityEntity, IdentityModel]):
     def __init__(self, session: AsyncSession, authorization: str | None = None):

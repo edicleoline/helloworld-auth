@@ -4,8 +4,8 @@ from abc import ABC
 from typing import overload
 
 from helloworld.core.data import AbstractRepository, TModel
-from helloworld.auth.features.identity import IdentityEntity
 from helloworld.core.data.repositories.abstract_repository import LogicalOperator
+from helloworld.auth.features.identity import IdentityEntity
 
 class IdentityRepository(AbstractRepository[IdentityEntity, TModel], ABC):
     @overload

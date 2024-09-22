@@ -1,11 +1,12 @@
 from __future__ import annotations
 
-from helloworld.core.infra.data.sqlalchemy import BaseModel
-from helloworld.auth.features.identity import IdentityEntity
 from datetime import datetime
 
 from sqlalchemy import String, DateTime
 from sqlalchemy.orm import Mapped, mapped_column
+
+from helloworld.core.infra.data.sqlalchemy import BaseModel
+from helloworld.auth.features.identity import IdentityEntity
 
 class IdentityModel(BaseModel[IdentityEntity]):
     __tablename__ = "identity"
