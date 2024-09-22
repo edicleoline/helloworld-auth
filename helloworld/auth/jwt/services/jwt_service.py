@@ -6,7 +6,7 @@ from typing import Any, Dict
 
 import jwt
 
-from helloworld.auth.features.jwt.services import AbstractService
+from helloworld.auth.jwt.services import AbstractService
 
 class JWTService(AbstractService):
     async def encode(self, data: Dict[str, Any]) -> str:

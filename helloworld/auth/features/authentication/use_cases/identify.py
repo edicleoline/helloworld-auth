@@ -6,7 +6,7 @@ from helloworld.core import BaseUseCaseUnitOfWork
 from helloworld.auth.features.identity import IdentityRepository, IdentityEntity
 from helloworld.auth.features.identity_key import IdentityKeyRepository, IdentityKeyEntity
 from helloworld.core.util import is_valid_phone, is_valid_email
-from helloworld.auth.features.jwt.services import AbstractService
+from helloworld.auth.jwt.services import AbstractService
 
 async def find_identity(repository: IdentityRepository, identifier: str) -> IdentityEntity | None:
     fields = ["username", "email", "phone"]

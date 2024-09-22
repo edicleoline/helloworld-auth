@@ -6,7 +6,7 @@ from typing import Any
 
 from helloworld.core import BaseUseCaseUnitOfWork
 from helloworld.auth.features.identity import IdentityRepository
-from helloworld.auth.features.jwt.services import AbstractService
+from helloworld.auth.jwt.services import AbstractService
 from helloworld.core.util.security import verify_password, hash_password
 from helloworld.auth.features.authentication.entities import ResponseEntity
 
