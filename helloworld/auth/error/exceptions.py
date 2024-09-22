@@ -1,0 +1,3 @@
+from helloworld.core.error import HelloWorldError
+
+class InvalidLoginError(HelloWorldError): ...

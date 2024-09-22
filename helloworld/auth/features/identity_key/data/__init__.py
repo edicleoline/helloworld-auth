@@ -1,0 +1,2 @@
+from .repositories.identity_key_repository import IdentityKeyRepository
+from helloworld.auth.features.identity_key.infra.data.sqlalchemy.identity_key_repository_impl import IdentityKeyRepositoryImpl
