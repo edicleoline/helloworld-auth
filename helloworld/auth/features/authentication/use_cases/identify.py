@@ -3,9 +3,9 @@ from __future__ import annotations
 from abc import ABC
 
 from helloworld.core import BaseUseCaseUnitOfWork
+from helloworld.core.util import is_valid_phone, is_valid_email
 from helloworld.auth.features.identity import IdentityRepository, IdentityEntity
 from helloworld.auth.features.identity_key import IdentityKeyRepository, IdentityKeyEntity
-from helloworld.core.util import is_valid_phone, is_valid_email
 from helloworld.auth.jwt.services import AbstractService
 from helloworld.account.features.user import UserEntity
 from helloworld.account.features.user.data import UserRepository
