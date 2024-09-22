@@ -13,6 +13,7 @@ from helloworld.auth.features.authentication.entities import ResponseEntity
 from helloworld.auth.error import exceptions
 from helloworld.account.features.user import UserEntity
 from helloworld.account.features.user.data import UserRepository
+from helloworld.core.error.exceptions import InvalidRequestError
 
 class AuthenticateUseCase(BaseUseCaseUnitOfWork[dict[str, Any], ResponseEntity], ABC):
     async def execute(self, token: str, **kwargs) -> ResponseEntity | None:
@@ -37,7 +38,7 @@ class AuthenticateUseCaseImpl(AuthenticateUseCase):
             identity_entity = await identity_repository.find(id=sub)
 
             if not identity_entity:
-                raise exceptions.BadRequestError(f"There is no identity for sub {sub}.")
+                raise InvalidRequestError(f"There is no identity for sub {sub}.")
 
             user_repository: UserRepository = await unit_of_work.repository_factory.instance(UserRepository)
             user_entity: UserEntity | None = await user_repository.find(identity_id=identity_entity.id)
@@ -45,7 +46,7 @@ class AuthenticateUseCaseImpl(AuthenticateUseCase):
             kwuser = get_kwarg(kwargs, "user", UserEntity)
             if not user_entity:
                 if not kwuser:
-                    raise exceptions.BadRequestError(f"Signup mode: you have to tell me about user. Use 'user' argument.")
+                    raise InvalidRequestError(f"Signup mode: you have to tell me about user. Use 'user' argument.")
 
                 user_entity_copy = kwuser.copy(id = None, identity_id=identity_entity.id)
                 user_entity = await user_repository.save(user_entity_copy)
@@ -54,7 +55,7 @@ class AuthenticateUseCaseImpl(AuthenticateUseCase):
             is_oneshot_signup = opt == "signup" and method in {"email", "username"}
 
             if not password and (is_oneshot_signin or is_oneshot_signup):
-                raise exceptions.BadRequestError("You have to tell me the password.")
+                raise InvalidRequestError("You have to tell me the password.")
 
             if is_oneshot_signin and identity_entity.password_hash and not verify_password(password, identity_entity.password_hash):
                 raise exceptions.InvalidLoginOrPasswordError("Invalid login or password.")
