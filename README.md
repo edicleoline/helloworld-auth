@@ -1,4 +1,5 @@
 # Helloworld Auth
+Don't worry, even though this README is in Portuguese, the code is fully bilingual! It speaks fluent Python... and English. So, go ahead and dive in — no translation required, just your coding skills! 😎
 
 **Helloworld Auth** é uma biblioteca poderosa para gerenciamento de autenticação e autorização, projetada para ser flexível e escalável, permitindo suporte a múltiplos métodos de login e controle avançado de permissões. Construída sobre os princípios da **Clean Architecture**, ela oferece uma implementação robusta e extensível para lidar com fluxos de autenticação e segurança em qualquer aplicação.
 
@@ -21,5 +22,8 @@ A Helloworld Auth foi projetada para se integrar perfeitamente com a [**Hellowor
 2. Controle de Escopos e Permissões: defina escopos customizados para gerenciar o acesso dos usuários a diferentes funcionalidades.
 3. Templates de Email: notificações de login e recuperação de senha utilizando templates customizados.
 4. Suporte a Login Externo: Integração com provedores de autenticação externa.
+
+## Contribua
+Gostou do projeto? Contribua com melhorias, abra issues ou envie um pull request. Toda ajuda é bem-vinda!
 
 
