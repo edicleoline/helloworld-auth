@@ -7,6 +7,8 @@ from helloworld.auth.features.identity import IdentityRepository, IdentityEntity
 from helloworld.auth.features.identity_key import IdentityKeyRepository, IdentityKeyEntity
 from helloworld.core.util import is_valid_phone, is_valid_email
 from helloworld.auth.jwt.services import AbstractService
+from helloworld.account.features.user import UserEntity
+from helloworld.account.features.user.data import UserRepository
 
 async def find_identity(repository: IdentityRepository, identifier: str) -> IdentityEntity | None:
     fields = ["username", "email", "phone"]
@@ -29,13 +31,19 @@ class IdentifyUseCaseImpl(IdentifyUseCase):
             method = ("phone" if is_valid_phone(identifier) else "email" if is_valid_email(identifier) else "username")
             token_data = {"opt": "signup" if not identity_entity else "signin", "method": method, "scope": ["read"]}
 
-            if identity_entity and identity_entity.last_login and not identity_entity.password_hash:
-                if method == "email":
-                    print("Send email to reset password")
-                elif method == "username":
-                    print("Impossible")
+            user_repository: UserRepository = await unit_of_work.repository_factory.instance(UserRepository)
+            user_entity: UserEntity | None = await user_repository.find(identity_id=identity_entity.id) if identity_entity else None
 
-                return None
+            if (
+                method in {"email", "username"}
+                and identity_entity
+                and identity_entity.email
+                and identity_entity.last_login
+                and not identity_entity.password_hash
+                and user_entity
+            ):
+                raise NotImplementedError("Password reset flow for users with an existing identity and last login but "
+                                          "without a password hash is not implemented.")
 
             if not identity_entity:
                 identity_entity = await identity_repository.save(IdentityEntity(**{method: identifier}))
