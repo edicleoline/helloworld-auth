@@ -23,6 +23,18 @@ A Helloworld Auth foi projetada para se integrar perfeitamente com a [**Hellowor
 3. Templates de Email: notificações de login e recuperação de senha utilizando templates customizados.
 4. Suporte a Login Externo: Integração com provedores de autenticação externa.
 
+## TODO
+
+Aqui estão algumas funcionalidades que já estamos implementando no **helloworld-auth**:
+
+- **Autenticação utilizando login de terceiros (OAuth2)**: Suporte para autenticação via plataformas como Google, Facebook, GitHub, e outras usando o padrão OAuth2.
+  
+- **Autorização**: Adicionar mecanismos robustos de controle de acesso e permissões, garantindo uma gestão precisa e eficiente dos níveis de acesso dos usuários.
+
+- **Configuração**: Alterar facilmente o comportamento da biblioteca por meio de opções de configuração personalizáveis.
+
+Fique de olho nas próximas atualizações! 🚀
+
 ## Contribua
 Gostou do projeto? Contribua com melhorias, abra issues ou envie um pull request. Toda ajuda é bem-vinda!
 
