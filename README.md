@@ -35,6 +35,7 @@ A autenticação acontece em duas etapas. A primeira, **identificação**.
 from helloworld.auth.features.authentication import get_identify_use_case
 
 identify_use_case = await get_identify_use_case()
+
 # Identifica e retorna um JWT Token, necessário Autenticação
 token = await identify_use_case.execute(identifier="nat@sakimura.com")
 
