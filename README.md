@@ -23,6 +23,44 @@ A Helloworld Auth foi projetada para se integrar perfeitamente com a [**Hellowor
 3. Templates de Email: notificações de login e recuperação de senha utilizando templates customizados.
 4. Suporte a Login Externo: Integração com provedores de autenticação externa.
 
+## Exemplo de Uso
+
+Aqui está um exemplo básico de como usar a biblioteca para identificar e autenticar uma identidade.
+Sim, definimos uma distância entre ***Usuário*** e ***Identidade***. Em ***Exemplos de Uso***, no ***README*** da **Helloworld Core**, por exemplo, utilizamos bancos de dados distinto para a camada de **Autenticação**, isolando-a do restante do negócio.
+E não fizemos isso apenas no banco de dados. Criamos uma camada totalmente isolada na aplicação, por várias razões. Escreverei sobre isso num artigo e atualizarei aqui. 
+
+A autenticação acontece em duas etapas. A primeira, **identificação**.
+
+```python
+from helloworld.auth.features.authentication import get_identify_use_case
+
+identify_use_case = await get_identify_use_case()
+# Identifica e retorna um JWT Token, necessário Autenticação
+token = await identify_use_case.execute(identifier="nat@sakimura.com")
+
+# ou usando um username
+token = await identify_use_case.execute(identifier="mikejones")
+
+# ou usando um número de telefone
+token = await identify_use_case.execute(identifier="9912-5003")
+```
+
+A segunda, **autenticação**.
+
+```python
+from helloworld.auth.features.authentication import get_authenticate_use_case
+from helloworld.auth.features.authentication.entities import ResponseEntity
+from helloworld.account.features.user import UserEntity
+
+authenticate_use_case = await get_authenticate_use_case()
+token: ResponseEntity | None = await authenticate_use_case.execute(
+    token=identity_token,
+    password="qwert-1234",
+    # Necessário caso identificado SignUp. Desnecessário se SignIn
+    user=UserEntity(first_name="Edio")
+)
+```
+
 ## TODO
 
 Aqui estão algumas funcionalidades que já estamos implementando no **helloworld-auth**:
