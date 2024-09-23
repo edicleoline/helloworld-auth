@@ -36,7 +36,7 @@ from helloworld.auth.features.authentication import get_identify_use_case
 
 identify_use_case = await get_identify_use_case()
 
-# Identifica e retorna um JWT Token, necessário Autenticação
+# Identifica e retorna um JWT Token, necessário para Autenticação
 token = await identify_use_case.execute(identifier="nat@sakimura.com")
 
 # ou usando um username
