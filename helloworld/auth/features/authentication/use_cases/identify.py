@@ -18,7 +18,7 @@ async def find_identity(repository: IdentityRepository, identifier: str) -> Iden
             return identity
     return None
 
-class IdentifyUseCase(BaseUseCaseUnitOfWork[str, str], ABC):
+class IdentifyUseCase(BaseUseCaseUnitOfWork[str, str | None], ABC):
     async def execute(self, identifier: str) -> str | None:
         raise NotImplementedError
 

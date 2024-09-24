@@ -1,6 +1,12 @@
 # Helloworld Auth
+
+![Python](https://img.shields.io/badge/Python-3.9%2B-blue?logo=python)
+![JWT Best Practices](https://img.shields.io/badge/JWT-Best%20Practices-blue)
+![OAuth2](https://img.shields.io/badge/OAuth2-Supported-brightgreen)
+
 Don't worry, even though this README is in Portuguese, the code is fully bilingual! It speaks fluent Python... and English. So, go ahead and dive in — no translation required, just your coding skills! 😎
 
+## Introdução
 **Helloworld Auth** é uma biblioteca poderosa para gerenciamento de autenticação e autorização, projetada para ser flexível e escalável, permitindo suporte a múltiplos métodos de login e controle avançado de permissões. Construída sobre os princípios da **Clean Architecture**, ela oferece uma implementação robusta e extensível para lidar com fluxos de autenticação e segurança em qualquer aplicação.
 
 ## Principais Funcionalidades
