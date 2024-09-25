@@ -22,8 +22,8 @@ class AuthenticateUseCase(BaseUseCaseUnitOfWork[dict[str, Any], ResponseEntity],
 class AuthenticateUseCaseImpl(AuthenticateUseCase):
     async def execute(self, token: str, **kwargs) -> ResponseEntity | None:
         async with self.unit_of_work as unit_of_work:
-            token_jwt_service: AbstractService = await self.services.get("authentication", "token")
-            decoded_token = await token_jwt_service.decode(token)
+            token_service: AbstractService = await self.services.get("authentication", "token")
+            decoded_token = await token_service.decode(token)
 
             if not decoded_token or not decoded_token.get("sub") or not decoded_token.get("opt") or not decoded_token.get("method"):
                 raise exceptions.InvalidTokenError(f"Invalid token {token}.")
@@ -68,10 +68,10 @@ class AuthenticateUseCaseImpl(AuthenticateUseCase):
 
                 identity_entity = await identity_repository.save(updated_identity)
 
-                refresh_token_jwt_service: AbstractService = await self.services.get("authentication", "refresh-token")
+                refresh_token_service: AbstractService = await self.services.get("authentication", "refresh-token")
 
-                access_token = await token_jwt_service.encode({"sub": identity_entity.id})
-                refresh_token = await refresh_token_jwt_service.encode({"sub": identity_entity.id})
+                access_token = await token_service.encode({"sub": identity_entity.id})
+                refresh_token = await refresh_token_service.encode({"sub": identity_entity.id})
 
                 return ResponseEntity(access_token=access_token, refresh_token=refresh_token)
 

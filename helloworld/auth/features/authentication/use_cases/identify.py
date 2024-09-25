@@ -48,10 +48,10 @@ class IdentifyUseCaseImpl(IdentifyUseCase):
             if not identity_entity:
                 identity_entity = await identity_repository.save(IdentityEntity(**{method: identifier}))
 
-            jwt_service: AbstractService = await self.services.get("authentication", "token")
+            token_service: AbstractService = await self.services.get("authentication", "token")
             token_data["sub"] = identity_entity.id
 
-            token = await jwt_service.encode(token_data)
+            token = await token_service.encode(token_data)
 
             identity_key_repository: IdentityKeyRepository = await unit_of_work.repository_factory.instance(IdentityKeyRepository)
 
