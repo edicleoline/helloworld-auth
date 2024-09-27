@@ -56,12 +56,12 @@ A segunda, **autenticação**.
 
 ```python
 from helloworld.auth.features.authentication import get_authenticate_use_case
-from helloworld.auth.features.authentication.entities import ResponseEntity
+from helloworld.auth.features.authentication.entities import AuthenticateResponseEntity
 from helloworld.account.features.user import UserEntity
 
 authenticate_use_case = await get_authenticate_use_case()
 
-token: ResponseEntity | None = await authenticate_use_case.execute(
+token: AuthenticateResponseEntity | None = await authenticate_use_case.execute(
     token=identity_token,
     password="qwert-1234",
     # Necessário caso identificado SignUp. Desnecessário se SignIn

@@ -1,1 +1,2 @@
-from .response_entity import ResponseEntity as ResponseEntity
+from .authenticate_response_entity import AuthenticateResponseEntity
+from .identify_response_entity import IdentifyResponseEntity

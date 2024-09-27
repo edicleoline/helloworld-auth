@@ -9,18 +9,18 @@ from helloworld.core.util.security import verify_password, hash_password
 from helloworld.core.util.arguments import get_kwarg
 from helloworld.auth.features.identity import IdentityRepository
 from helloworld.auth.jwt.services import AbstractService
-from helloworld.auth.features.authentication.entities import ResponseEntity
+from helloworld.auth.features.authentication.entities import AuthenticateResponseEntity
 from helloworld.auth.error import exceptions
 from helloworld.account.features.user import UserEntity
 from helloworld.account.features.user.data import UserRepository
 from helloworld.core.error.exceptions import InvalidRequestError
 
-class AuthenticateUseCase(BaseUseCaseUnitOfWork[dict[str, Any], ResponseEntity], ABC):
-    async def execute(self, token: str, **kwargs) -> ResponseEntity | None:
+class AuthenticateUseCase(BaseUseCaseUnitOfWork[dict[str, Any], AuthenticateResponseEntity], ABC):
+    async def execute(self, token: str, **kwargs) -> AuthenticateResponseEntity | None:
         raise NotImplementedError
 
 class AuthenticateUseCaseImpl(AuthenticateUseCase):
-    async def execute(self, token: str, **kwargs) -> ResponseEntity | None:
+    async def execute(self, token: str, **kwargs) -> AuthenticateResponseEntity | None:
         async with self.unit_of_work as unit_of_work:
             token_service: AbstractService = await self.services.get("authentication", "token")
             decoded_token = await token_service.decode(token)
@@ -73,6 +73,6 @@ class AuthenticateUseCaseImpl(AuthenticateUseCase):
                 access_token = await token_service.encode({"sub": identity_entity.id})
                 refresh_token = await refresh_token_service.encode({"sub": identity_entity.id})
 
-                return ResponseEntity(access_token=access_token, refresh_token=refresh_token)
+                return AuthenticateResponseEntity(access_token=access_token, refresh_token=refresh_token)
 
             raise NotImplementedError("Support for other authentication methods (e.g., phone or OAuth2) has not been implemented yet.")

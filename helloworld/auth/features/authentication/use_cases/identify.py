@@ -9,6 +9,7 @@ from helloworld.auth.features.identity_key import IdentityKeyRepository, Identit
 from helloworld.auth.jwt.services import AbstractService
 from helloworld.account.features.user import UserEntity
 from helloworld.account.features.user.data import UserRepository
+from helloworld.auth.features.authentication.entities import IdentifyResponseEntity
 
 async def find_identity(repository: IdentityRepository, identifier: str) -> IdentityEntity | None:
     fields = ["username", "email", "phone"]
@@ -18,12 +19,12 @@ async def find_identity(repository: IdentityRepository, identifier: str) -> Iden
             return identity
     return None
 
-class IdentifyUseCase(BaseUseCaseUnitOfWork[str, str | None], ABC):
-    async def execute(self, identifier: str) -> str | None:
+class IdentifyUseCase(BaseUseCaseUnitOfWork[str, IdentifyResponseEntity | None], ABC):
+    async def execute(self, identifier: str) -> IdentifyResponseEntity | None:
         raise NotImplementedError
 
 class IdentifyUseCaseImpl(IdentifyUseCase):
-    async def execute(self, identifier: str) -> str | None:
+    async def execute(self, identifier: str) -> IdentifyResponseEntity | None:
         async with self.unit_of_work as unit_of_work:
             identity_repository: IdentityRepository = await unit_of_work.repository_factory.instance(IdentityRepository)
             identity_entity = await find_identity(identity_repository, identifier)
@@ -60,4 +61,4 @@ class IdentifyUseCaseImpl(IdentifyUseCase):
                 token=token
             ))
 
-            return token
+            return IdentifyResponseEntity(access_token=token, method=method)
