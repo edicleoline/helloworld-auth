@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from sqlalchemy import String
+from sqlalchemy import String, BigInteger
 from sqlalchemy.orm import Mapped, mapped_column
 
 from helloworld.core.infra.data.sqlalchemy import BaseModel
@@ -10,6 +10,5 @@ class IdentityKeyModel(BaseModel[IdentityKeyEntity]):
     __tablename__ = "identity_key"
     __entity_cls__ = IdentityKeyEntity
 
-    id: Mapped[str] = mapped_column(primary_key=True)
-    identity_id: Mapped[str] = mapped_column(String(80))
-    token: Mapped[str] = mapped_column(String(540))
+    identity_id: Mapped[int] = mapped_column(BigInteger, nullable=False)
+    token: Mapped[str] = mapped_column(String(255), nullable=False)

@@ -35,6 +35,11 @@ class IdentifyUseCaseImpl(IdentifyUseCase):
             user_repository: UserRepository = await unit_of_work.repository_factory.instance(UserRepository)
             user_entity: UserEntity | None = await user_repository.find(identity_id=identity_entity.id) if identity_entity else None
 
+            redirect = "/auth/password" if method in {"email", "username"} and identity_entity and identity_entity.password_hash else "/auth/register"
+
+            if method == "phone":
+                redirect = 'phone/verify'
+
             if (
                 method in {"email", "username"}
                 and identity_entity
@@ -61,4 +66,4 @@ class IdentifyUseCaseImpl(IdentifyUseCase):
                 token=token
             ))
 
-            return IdentifyResponseEntity(access_token=token, method=method)
+            return IdentifyResponseEntity(access_token=token, redirect=redirect)

@@ -4,4 +4,4 @@ from pydantic import BaseModel, Field
 
 class IdentifyResponseEntity(BaseModel):
     access_token: str = Field(title="Access token")
-    method: str = Field(title="Identify method")
+    redirect: str = Field(title="Flow")

@@ -12,9 +12,8 @@ class IdentityModel(BaseModel[IdentityEntity]):
     __tablename__ = "identity"
     __entity_cls__ = IdentityEntity
 
-    id: Mapped[str] = mapped_column(primary_key=True)
-    username: Mapped[str] = mapped_column(String(80))
-    email: Mapped[str] = mapped_column(String(240))
-    phone: Mapped[str] = mapped_column(String(240))
-    password_hash: Mapped[str] = mapped_column(String(540))
+    username: Mapped[str] = mapped_column(String(50), nullable=True)
+    email: Mapped[str] = mapped_column(String(256), nullable=True, unique=True)
+    phone: Mapped[str] = mapped_column(String(20), nullable=True)
+    password_hash: Mapped[str] = mapped_column(String(255), nullable=True)
     last_login: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True)

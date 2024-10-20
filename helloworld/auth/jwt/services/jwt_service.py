@@ -24,7 +24,7 @@ class JWTService(AbstractService):
             decoded_data = jwt.decode(token, self.secret_key, algorithms=[self.algorithm])
             return decoded_data
         except jwt.ExpiredSignatureError:
-            print("Expired token")
+            print("Expired token", "/home/edicleo/dev/helloworld/backend/libs/auth/helloworld/auth/jwt/services/jwt_service.py")
         except jwt.InvalidTokenError:
             print("Invalid token")
 
