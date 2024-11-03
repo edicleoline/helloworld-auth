@@ -9,6 +9,9 @@ from helloworld.auth.features.identity import IdentityEntity
 
 class IdentityRepository(AbstractRepository[IdentityEntity, TModel], ABC):
     @overload
+    async def find(self, id: int) -> IdentityEntity | None: ...
+
+    @overload
     async def find(self, username: str) -> IdentityEntity | None: ...
 
     @overload

@@ -3,7 +3,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Dict, Any
 
-class AbstractService(ABC):
+class TokenService(ABC):
     secret_key: str
     algorithm: str
     expiration_minutes: int

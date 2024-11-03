@@ -6,9 +6,9 @@ from typing import Any, Dict
 
 import jwt
 
-from helloworld.auth.jwt.services import AbstractService
+from helloworld.auth.jwt.services import TokenService
 
-class JWTService(AbstractService):
+class JWTService(TokenService):
     async def encode(self, data: Dict[str, Any]) -> str:
         expiration_time = datetime.now(tz=ZoneInfo('UTC')) + timedelta(minutes=self.expiration_minutes)
         payload = {

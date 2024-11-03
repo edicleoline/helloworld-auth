@@ -1,2 +1,4 @@
 from .repositories.identity_repository import IdentityRepository
-from helloworld.auth.features.identity.infra.data.sqlalchemy.identity_repository_impl import IdentityRepositoryImpl
+from .repositories.identity_verification_repository import IdentityVerificationRepository
+from ..infra.data.sqlalchemy.identity_repository_impl import IdentityRepositoryImpl
+from ..infra.data.sqlalchemy.identity_verification_repository_impl import IdentityVerificationRepositoryImpl

@@ -7,8 +7,8 @@ from typing import Any
 from helloworld.core import BaseUseCaseUnitOfWork
 from helloworld.core.util.security import verify_password, hash_password
 from helloworld.core.util.arguments import get_kwarg
-from helloworld.auth.features.identity import IdentityRepository
-from helloworld.auth.jwt.services import AbstractService
+from helloworld.auth.features.identity.data import IdentityRepository
+from helloworld.auth.jwt.services import TokenService
 from helloworld.auth.features.authentication.entities import AuthenticateResponseEntity
 from helloworld.auth.error import exceptions
 from helloworld.account.features.user import UserEntity
@@ -22,8 +22,8 @@ class RefreshTokenteUseCase(BaseUseCaseUnitOfWork[dict[str, Any], AuthenticateRe
 class RefreshTokenUseCaseImpl(RefreshTokenteUseCase):
     async def execute(self, token: str, **kwargs) -> AuthenticateResponseEntity | None:
         async with self.unit_of_work as unit_of_work:
-            token_service: AbstractService = await self.services.get("authentication", "token")
-            refresh_token_service: AbstractService = await self.services.get("authentication", "refresh-token")
+            token_service: TokenService = await self.services.get("authentication", "token")
+            refresh_token_service: TokenService = await self.services.get("authentication", "refresh-token")
 
             decoded_token = await refresh_token_service.decode(token)
 

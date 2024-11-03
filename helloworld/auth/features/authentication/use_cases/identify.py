@@ -4,9 +4,10 @@ from abc import ABC
 
 from helloworld.core import BaseUseCaseUnitOfWork
 from helloworld.core.util import is_valid_phone, is_valid_email
-from helloworld.auth.features.identity import IdentityRepository, IdentityEntity
+from helloworld.auth.features.identity import IdentityEntity
+from helloworld.auth.features.identity.data import IdentityRepository
 from helloworld.auth.features.identity_key import IdentityKeyRepository, IdentityKeyEntity
-from helloworld.auth.jwt.services import AbstractService
+from helloworld.auth.jwt.services import TokenService
 from helloworld.account.features.user import UserEntity
 from helloworld.account.features.user.data import UserRepository
 from helloworld.auth.features.authentication.entities import IdentifyResponseEntity
@@ -54,7 +55,7 @@ class IdentifyUseCaseImpl(IdentifyUseCase):
             if not identity_entity:
                 identity_entity = await identity_repository.save(IdentityEntity(**{method: identifier}))
 
-            token_service: AbstractService = await self.services.get("authentication", "token")
+            token_service: TokenService = await self.services.get("authentication", "token")
             token_data["sub"] = identity_entity.id
 
             token = await token_service.encode(token_data)

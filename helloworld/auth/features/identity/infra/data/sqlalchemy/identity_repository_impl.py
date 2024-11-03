@@ -17,6 +17,10 @@ class IdentityRepositoryImpl(IdentityRepository, BaseRepository[IdentityEntity, 
         super().__init__(session=session, model_cls=IdentityModel, authorization=authorization)
 
     @overload
+    async def find(self, id: int) -> UserEntity | None:
+        return await self._find(id=id)
+
+    @overload
     async def find(self, username: str) -> UserEntity | None:
         return await self._find(username=username)
 

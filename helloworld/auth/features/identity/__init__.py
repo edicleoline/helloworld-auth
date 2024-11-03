@@ -1,3 +1,2 @@
 from helloworld.auth.features.identity.entities.identity_entity import IdentityEntity
-from helloworld.auth.features.identity.data.repositories.identity_repository import IdentityRepository
-from helloworld.auth.features.identity.infra.data.sqlalchemy.identity_repository_impl import IdentityRepositoryImpl
+from helloworld.auth.features.identity.entities.identity_verification_entity import IdentityVerificationEntity

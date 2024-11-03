@@ -1,0 +1,4 @@
+from .sms_otp_strategy import SMSOTPStrategy
+from .call_otp_strategy import CallOTPStrategy
+from .missed_call_otp_strategy import MissedCallOTPStrategy
+from .app_otp_strategy import APPOTPStrategy
